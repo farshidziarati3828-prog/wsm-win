@@ -1,0 +1,36 @@
+{
+  "packageId": "ir.rointansupplement.wpstoremanager",
+  "host": "rointansupplement.ir",
+  "startUrl": "/wp-content/plugins/wp-store-manager/wsm-app/index.html",
+  "name": "مدیر فروشگاه — WP Store Manager",
+  "launcherName": "مدیر فروشگاه",
+  "display": "fullscreen",
+  "orientation": "default",
+  "themeColor": "#0F1115",
+  "themeColorDark": "#0F1115",
+  "navigationColor": "#0F1115",
+  "navigationColorDark": "#0F1115",
+  "backgroundColor": "#0F1115",
+  "iconUrl": "https://rointansupplement.ir/wp-content/plugins/wp-store-manager/wsm-app/icon-512.png",
+  "maskableIconUrl": "https://rointansupplement.ir/wp-content/plugins/wp-store-manager/wsm-app/icon-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "enableNotifications": false,
+  "enableSiteSettingsShortcut": false,
+  "fallbackType": "customtabs",
+  "isChromeOSOnly": false,
+  "minSdkVersion": 24,
+  "appVersion": "1.0.0",
+  "appVersionCode": 1,
+  "webManifestUrl": "https://rointansupplement.ir/wp-content/plugins/wp-store-manager/wsm-app/manifest.json",
+  "signingKey": {
+    "path": "./release-key.jks",
+    "alias": "wsm-release-key"
+  },
+  "fingerprints": [
+    {
+      "name": "release",
+      "value": "4D:C2:DD:E0:29:C4:F9:28:E0:EE:D9:0B:7D:A0:95:30:2E:B1:91:75:D2:B3:F5:E1:77:9F:D7:95:68:79:35:E1"
+    }
+  ],
+  "shortcuts": []
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ir.rointansupplement.wpstoremanager",
+      "sha256_cert_fingerprints": [
+        "4D:C2:DD:E0:29:C4:F9:28:E0:EE:D9:0B:7D:A0:95:30:2E:B1:91:75:D2:B3:F5:E1:77:9F:D7:95:68:79:35:E1"
+      ]
+    }
+  }
+]

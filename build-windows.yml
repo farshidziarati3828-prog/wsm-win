@@ -1,0 +1,176 @@
+name: Build Windows installers
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    name: Build NSIS and MSI installers
+    runs-on: windows-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python for the bundled sidecar
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: bridge/requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build artifacts
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: ./src-tauri -> target
+
+      - name: Install Tauri CLI and frontend packages
+        run: npm install
+
+      - name: Install Vite frontend dependencies
+        working-directory: ./wsm-app
+        run: npm ci
+
+      - name: Build frontend into wsm-app/dist
+        working-directory: ./wsm-app
+        run: npm run build
+
+      - name: Verify the bundled frontend app shell
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $requiredFiles = @(
+            'wsm-app/dist/index.html',
+            'wsm-app/dist/club.html',
+            'wsm-app/dist/desktop.html',
+            'wsm-app/dist/manifest.json',
+            'wsm-app/dist/sw.js',
+            'wsm-app/dist/dexie-4.4.6.min.js',
+            'wsm-app/dist/icon-192.png',
+            'wsm-app/dist/icon-512.png'
+          )
+          foreach ($file in $requiredFiles) {
+            if (-not (Test-Path -LiteralPath $file)) {
+              throw "Required frontend output is missing: $file"
+            }
+          }
+          $tauriIcons = @(
+            'src-tauri/icons/32x32.png',
+            'src-tauri/icons/64x64.png',
+            'src-tauri/icons/128x128.png',
+            'src-tauri/icons/128x128@2x.png',
+            'src-tauri/icons/icon.png',
+            'src-tauri/icons/icon.icns',
+            'src-tauri/icons/icon.ico'
+          )
+          foreach ($file in $tauriIcons) {
+            if (-not (Test-Path -LiteralPath $file)) {
+              throw "Required Tauri icon is missing: $file"
+            }
+          }
+          Write-Host 'Verified Vite output, app-shell assets, and the Tauri icon set.'
+
+      - name: Build and verify the self-contained Python sidecar
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $target = (rustc --print host-tuple).Trim()
+          if ($target -ne 'x86_64-pc-windows-msvc') {
+            throw "Unexpected Windows target triple: $target"
+          }
+
+          python -m pip install --upgrade pip
+          python -m pip install -r bridge/requirements.txt pyinstaller==6.22.3
+
+          $binaryDir = 'src-tauri/binaries'
+          $workDir = Join-Path $env:RUNNER_TEMP 'wsm-pyinstaller-work'
+          $specDir = Join-Path $env:RUNNER_TEMP 'wsm-pyinstaller-spec'
+          New-Item -ItemType Directory -Force -Path $binaryDir, $workDir, $specDir | Out-Null
+          $sidecarName = "wsm-local-bridge-$target"
+          $pyinstallerArgs = @(
+            '--onefile', '--noconfirm', '--clean', '--console',
+            '--name', $sidecarName,
+            '--distpath', $binaryDir,
+            '--workpath', $workDir,
+            '--specpath', $specDir,
+            '--collect-all', 'zk',
+            '--collect-all', 'pymodbus',
+            '--collect-all', 'serial',
+            '--collect-all', 'usb',
+            '--collect-all', 'libusb_package',
+            '--collect-all', 'tzdata',
+            '--copy-metadata', 'pyzk',
+            '--copy-metadata', 'pymodbus',
+            '--copy-metadata', 'pyserial',
+            '--copy-metadata', 'pyusb',
+            '--copy-metadata', 'libusb-package',
+            '--copy-metadata', 'tzdata',
+            'bridge/wsm_local_bridge.py'
+          )
+          & python -m PyInstaller @pyinstallerArgs
+          if ($LASTEXITCODE -ne 0) { throw 'PyInstaller sidecar build failed.' }
+
+          $sidecarPath = Join-Path $binaryDir "$sidecarName.exe"
+          if (-not (Test-Path -LiteralPath $sidecarPath)) {
+            throw "Tauri sidecar not found at $sidecarPath"
+          }
+          $contents = (& pyi-archive_viewer -l -r $sidecarPath 2>&1 | Out-String)
+          if ($LASTEXITCODE -ne 0) { throw 'Could not inspect the PyInstaller archive.' }
+          if ($contents -notmatch 'python3\d+\.dll') { throw 'Bundled Python runtime DLL is missing.' }
+          if ($contents -notmatch 'vcruntime140(?:_1)?\.dll') { throw 'Bundled Visual C++ runtime DLL is missing.' }
+          if ($contents -notmatch 'libusb-1\.0\.dll') { throw 'Bundled libusb DLL is missing.' }
+          Write-Host "Verified self-contained sidecar: $sidecarPath"
+
+      - name: Build Windows NSIS and MSI installers
+        env:
+          WSM_FRONTEND_PREBUILT: '1'
+          WSM_SIDECAR_PREBUILT: '1'
+        run: npm run tauri build
+
+      - name: Verify offline WebView2 installers and record hashes
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $minimumBytes = 100000000
+          $patterns = @(
+            'src-tauri/target/release/bundle/nsis/*.exe',
+            'src-tauri/target/release/bundle/msi/*.msi'
+          )
+          $installers = @()
+          foreach ($pattern in $patterns) {
+            $installers += @(Get-ChildItem -Path $pattern -File -ErrorAction SilentlyContinue)
+          }
+          if ($installers.Count -lt 2) {
+            throw "Expected both NSIS .exe and MSI installers; found $($installers.Count)."
+          }
+          foreach ($installer in $installers) {
+            if ($installer.Length -lt $minimumBytes) {
+              throw "Installer $($installer.FullName) is only $($installer.Length) bytes; the offline WebView2 runtime may be missing."
+            }
+            $sha256 = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash
+            $line = "- $($installer.Name): $($installer.Length) bytes; SHA-256: $sha256"
+            Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY -Value $line -Encoding utf8
+            Write-Host $line
+          }
+
+      - name: Upload installers as a downloadable artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: wp-store-manager-windows-installers
+          path: |
+            src-tauri/target/release/bundle/nsis/*.exe
+            src-tauri/target/release/bundle/msi/*.msi
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 30

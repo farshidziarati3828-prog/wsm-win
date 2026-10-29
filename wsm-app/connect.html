@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#070c17">
+  <meta name="robots" content="noindex, nofollow">
+  <title>اتصال به فروشگاه — مدیر فروشگاه</title>
+  <style>
+    :root{color-scheme:dark;--bg:#070c17;--panel:#111b31;--line:#263759;--text:#e9efff;--muted:#9aaccb;--teal:#2dd4bf;--teal-dark:#0d9488;--red:#fca5a5;--green:#86efac;--amber:#fde68a;font-family:Vazirmatn,Tahoma,system-ui,sans-serif}
+    *{box-sizing:border-box}
+    html,body{min-height:100%;margin:0}
+    body{min-height:100vh;display:grid;place-items:center;padding:22px 14px;color:var(--text);background:radial-gradient(1100px 620px at 50% -12%,#16335d 0%,#0a1224 48%,var(--bg) 100%)}
+    main{width:min(100%,520px);padding:30px 25px;border:1px solid var(--line);border-radius:24px;background:rgba(17,27,49,.94);box-shadow:0 24px 75px #0009}
+    .brand{display:grid;justify-items:center;text-align:center;margin-bottom:22px}
+    .mark{width:68px;height:68px;display:grid;place-items:center;margin-bottom:12px;border-radius:20px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#031f1d;box-shadow:0 0 36px #2dd4bf55}
+    h1{margin:0;font-size:22px;line-height:1.6}
+    .intro{max-width:390px;margin:7px 0 0;color:var(--muted);font-size:14px;line-height:1.9}
+    label{display:block;margin:16px 0 7px;color:#bac8e0;font-size:14px;font-weight:600}
+    input{width:100%;min-height:48px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;outline:0;background:#080f1d;color:var(--text);font:15px/1.5 Tahoma,system-ui,sans-serif}
+    input:focus{border-color:var(--teal);box-shadow:0 0 0 3px #2dd4bf26}
+    input::placeholder{color:#657594}
+    .site-input,.key-input{direction:ltr;text-align:left;font-family:ui-monospace,Consolas,monospace}
+    .device-input{direction:rtl;text-align:right;font-family:inherit}
+    .key-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+    .secondary{min-width:76px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#182541;color:#dbe7fc;font:600 13px/1.5 Tahoma,system-ui,sans-serif;cursor:pointer}
+    button{font-family:inherit}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
+    .actions button,.submit{min-height:48px;padding:10px 12px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:filter .15s,transform .15s}
+    .actions button{border:1px solid #365070;background:#172541;color:#d8e5fc}
+    .submit{width:100%;margin-top:11px;border:0;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#031f1d;font-size:15px}
+    button:hover:not(:disabled){filter:brightness(1.08)}
+    button:active:not(:disabled){transform:scale(.99)}
+    button:disabled{opacity:.58;cursor:wait}
+    .hint{margin:8px 1px 0;color:#8fa2c3;font-size:12px;line-height:1.85}
+    .status{min-height:54px;margin-top:14px;padding:11px 13px;border:1px solid #293a59;border-radius:12px;background:#0a1221;color:var(--muted);font-size:13px;line-height:1.9;white-space:pre-line}
+    .status[data-kind="ok"]{border-color:#1f684d;background:#08221b;color:var(--green)}
+    .status[data-kind="error"]{border-color:#754047;background:#27151b;color:var(--red)}
+    .status[data-kind="warn"]{border-color:#755d2b;background:#281f12;color:var(--amber)}
+    .note{margin:17px 0 0;padding-top:15px;border-top:1px solid #ffffff14;color:#8294b4;font-size:12px;line-height:1.9}
+    .note strong{color:#c4d1e6}
+    @media(max-width:420px){main{padding:24px 18px;border-radius:19px}.actions{grid-template-columns:1fr}.actions button{min-height:44px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <div class="mark" aria-hidden="true">
+        <svg width="37" height="37" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8h14v-8M10 20v-4h4v4"/></svg>
+      </div>
+      <h1>اتصال به فروشگاه</h1>
+      <p class="intro">نشانی سایت و کلید دسترسی را وارد کنید. برنامه ابتدا اتصال به افزونه را بررسی می‌کند و سپس برای ورود کارمند به میزکار می‌رود.</p>
+    </header>
+
+    <form id="wsm-connect-form" autocomplete="off" novalidate>
+      <label for="wsm-site">نشانی سایت وردپرس</label>
+      <input class="site-input" id="wsm-site" name="site" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="https://example.com" required aria-describedby="site-help">
+      <p class="hint" id="site-help">اگر نشانی را بدون پروتکل وارد کنید، HTTPS در نظر گرفته می‌شود. برای سایت داخل شبکهٔ محلی، نشانی را با <span dir="ltr">http://</span> وارد کنید.</p>
+
+      <label for="wsm-key">کلید دسترسی فروشگاه</label>
+      <div class="key-row">
+        <input class="key-input" id="wsm-key" name="access_key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="wsm_ak_…" required>
+        <button class="secondary" id="wsm-toggle-key" type="button" aria-pressed="false">نمایش</button>
+      </div>
+
+      <label for="wsm-device">نام این دستگاه <span style="font-weight:400;color:#8294b4">(اختیاری)</span></label>
+      <input class="device-input" id="wsm-device" name="device_name" type="text" maxlength="100" autocomplete="off" placeholder="مثلاً رایانهٔ فروشگاه">
+
+      <div class="actions">
+        <button id="wsm-test-internet" type="button">تست اینترنت</button>
+        <button id="wsm-test-site" type="button">تست اتصال به سایت</button>
+      </div>
+      <button class="submit" id="wsm-connect" type="submit">اتصال به فروشگاه</button>
+      <div class="status" id="wsm-status" role="status" aria-live="polite">می‌توانید ابتدا اینترنت و سپس API افزونه را جداگانه آزمایش کنید.</div>
+    </form>
+
+    <p class="note"><strong>نکتهٔ امنیتی:</strong> کلید دسترسی فقط اتصال به فروشگاه را اعتبارسنجی می‌کند؛ ورود کارمند مرحلهٔ جداگانه‌ای است. خودِ کلید در برنامه ذخیره نمی‌شود. دکمهٔ تست اینترنت برای خواندن IP به <span dir="ltr">api.ipify.org</span> وصل می‌شود. پیش از تغییر فروشگاه، عملیات آفلاین فروشگاه قبلی را همگام کنید.</p>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var form = document.getElementById('wsm-connect-form');
+      var siteInput = document.getElementById('wsm-site');
+      var keyInput = document.getElementById('wsm-key');
+      var deviceInput = document.getElementById('wsm-device');
+      var statusNode = document.getElementById('wsm-status');
+      var testInternetButton = document.getElementById('wsm-test-internet');
+      var testSiteButton = document.getElementById('wsm-test-site');
+      var connectButton = document.getElementById('wsm-connect');
+      var toggleKeyButton = document.getElementById('wsm-toggle-key');
+      var actions = [testInternetButton, testSiteButton, connectButton];
+      var lastSite = null;
+      var busy = false;
+
+      function isPackagedApp() {
+        var host = String(location.hostname || '').toLowerCase();
+        return location.protocol === 'tauri:' || location.protocol === 'file:' ||
+          host === 'tauri.localhost' || host === 'localhost.tauri' || host.endsWith('.tauri.localhost');
+      }
+
+      function stripWordPressRoute(path) {
+        var value = String(path || '').replace(/\/+$/, '');
+        value = value.replace(/\/(?:wp-json)(?:\/.*)?$/i, '');
+        value = value.replace(/\/(?:wp-admin)(?:\/.*)?$/i, '');
+        value = value.replace(/\/wsm-connect(?:\/.*)?$/i, '');
+        value = value.replace(/\/index\.php$/i, '');
+        return value.replace(/\/+$/, '');
+      }
+
+      function normalizeSite(raw) {
+        var input = String(raw || '').trim();
+        if (!input) throw new Error('نشانی سایت را وارد کنید.');
+        if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(input)) input = 'https://' + input;
+
+        var url;
+        try { url = new URL(input); }
+        catch (error) { throw new Error('نشانی سایت معتبر نیست. نمونه: https://example.com'); }
+
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+          throw new Error('فقط نشانی‌های http:// و https:// پشتیبانی می‌شوند.');
+        }
+        if (!url.hostname || url.username || url.password) {
+          throw new Error('نشانی سایت نباید نام کاربری یا گذرواژه داشته باشد.');
+        }
+        if (url.hash) throw new Error('بخش پس از # را از نشانی سایت حذف کنید.');
+
+        var routeQuery = url.searchParams.getAll('rest_route');
+        var hasUnsupportedQuery = Array.from(url.searchParams.keys()).some(function (key) { return key !== 'rest_route'; });
+        if (hasUnsupportedQuery || routeQuery.length > 1) {
+          throw new Error('پارامترهای اضافی نشانی را حذف کنید.');
+        }
+
+        var basePath = stripWordPressRoute(url.pathname);
+        var site = url.origin + basePath;
+        var rest;
+        if (routeQuery.length === 1) {
+          var route = String(routeQuery[0] || '').replace(/^\/+|\/+$/g, '').replace(/^wp-json\//i, '');
+          if (route !== 'wsm/v1') throw new Error('نشانی REST باید مربوط به API مدیر فروشگاه باشد.');
+          rest = url.origin + basePath + '?rest_route=/wsm/v1/';
+        } else {
+          rest = site + '/wp-json/wsm/v1/';
+        }
+        return { site: site, rest: rest };
+      }
+
+      function apiUrlToSite(raw) {
+        if (!raw) return '';
+        try {
+          var api = new URL(String(raw), location.href);
+          if (isPackagedApp() && api.origin === location.origin) return '';
+          var root = stripWordPressRoute(api.pathname);
+          return api.origin + root;
+        } catch (error) { return ''; }
+      }
+
+      function setStatus(message, kind) {
+        statusNode.textContent = String(message || '');
+        statusNode.dataset.kind = kind || 'info';
+      }
+
+      function setBusy(value) {
+        busy = !!value;
+        actions.forEach(function (button) { button.disabled = busy; });
+        siteInput.disabled = busy;
+        keyInput.disabled = busy;
+        deviceInput.disabled = busy;
+      }
+
+      function platformInfo() {
+        var ua = navigator.userAgent || '';
+        var platform = /Android/i.test(ua) ? 'Android' : (/iPhone|iPad|iPod/i.test(ua) ? 'iOS' : (/Windows/i.test(ua) ? 'Windows' : (/Mac/i.test(ua) ? 'macOS' : (/Linux/i.test(ua) ? 'Linux' : 'Web'))));
+        var match = ua.match(/Android\s([\d.]+)|OS\s([\d_]+)/i);
+        var osVersion = match ? (match[1] || String(match[2] || '').replace(/_/g, '.')) : '';
+        return { platform: platform, os_version: osVersion };
+      }
+
+      function requestJson(url, options, timeoutMs) {
+        options = options || {};
+        var controller = typeof AbortController === 'function' ? new AbortController() : null;
+        var timer = controller ? window.setTimeout(function () { controller.abort(); }, timeoutMs || 12000) : null;
+        var request = {
+          method: options.method || 'GET',
+          headers: options.headers || { Accept: 'application/json' },
+          body: options.body,
+          mode: 'cors',
+          credentials: 'omit',
+          cache: 'no-store',
+          redirect: 'follow'
+        };
+        if (controller) request.signal = controller.signal;
+        return fetch(url, request).then(function (response) {
+          return response.text().then(function (text) {
+            var payload = null;
+            try { payload = text ? JSON.parse(text) : null; } catch (error) {}
+            return { response: response, payload: payload };
+          });
+        }).finally(function () {
+          if (timer !== null) window.clearTimeout(timer);
+        });
+      }
+
+      function serverMessage(result, fallback) {
+        var payload = result && result.payload;
+        return payload && typeof payload.message === 'string' && payload.message.trim() ? payload.message : fallback;
+      }
+
+      function networkMessage(error) {
+        if (error && error.name === 'AbortError') return 'سرور در زمان تعیین‌شده پاسخ نداد. نشانی، شبکه یا فایروال را بررسی کنید.';
+        return 'پاسخ سایت دریافت نشد. اگر «تست اینترنت» موفق است، نشانی سایت، گواهی HTTPS، فعال‌بودن افزونه و تنظیم CORS را بررسی کنید.';
+      }
+
+      function internetFailure(error) {
+        if (error && error.name === 'AbortError') return 'سرویس آزمون اینترنت در زمان تعیین‌شده پاسخ نداد.';
+        return 'به سرویس آزمون اینترنت دسترسی نرسید. ممکن است اینترنت قطع باشد یا api.ipify.org مسدود باشد؛ این نتیجه به‌تنهایی ثابت نمی‌کند همهٔ سایت‌ها قطع هستند.';
+      }
+
+      function currentTarget() {
+        lastSite = normalizeSite(siteInput.value);
+        return lastSite;
+      }
+
+      testInternetButton.addEventListener('click', function () {
+        if (busy) return;
+        setBusy(true);
+        setStatus('در حال بررسی دسترسی اینترنت به سرویس آزمون…', 'info');
+        var started = performance.now();
+        requestJson('https://api.ipify.org?format=json', { method: 'GET', headers: { Accept: 'application/json' } }, 10000)
+          .then(function (result) {
+            var ip = result.payload && typeof result.payload.ip === 'string' ? result.payload.ip : '';
+            if (!result.response.ok || !ip) throw new Error('ipify response unavailable');
+            var elapsed = Math.max(0, Math.round(performance.now() - started));
+            setStatus('اینترنت وصل است ✅\nنشانی IP: ' + ip + ' — ' + elapsed + ' میلی‌ثانیه', 'ok');
+          })
+          .catch(function (error) { setStatus(internetFailure(error), 'error'); })
+          .finally(function () { setBusy(false); });
+      });
+
+      testSiteButton.addEventListener('click', function () {
+        if (busy) return;
+        var target;
+        try { target = currentTarget(); }
+        catch (error) { setStatus(error.message || 'نشانی سایت معتبر نیست.', 'error'); return; }
+        setBusy(true);
+        setStatus('در حال بررسی REST API در ' + target.site + ' …', 'info');
+        requestJson(target.rest, { method: 'GET', headers: { Accept: 'application/json' } }, 12000)
+          .then(function (result) {
+            var data = result.payload;
+            if (result.response.status === 404) throw new Error('مسیر API پیدا نشد؛ مطمئن شوید افزونهٔ مدیر فروشگاه فعال است.');
+            if (!result.response.ok) throw new Error(serverMessage(result, 'سایت با کد ' + result.response.status + ' پاسخ داد.'));
+            if (!data || data.namespace !== 'wsm/v1' || !data.routes || typeof data.routes !== 'object') {
+              throw new Error('سایت پاسخ داد، اما API افزونهٔ مدیر فروشگاه شناسایی نشد.');
+            }
+            var count = Object.keys(data.routes).length;
+            setStatus('اتصال برقرار شد ✅\nسایت: ' + target.site + '\nافزونه فعال است (' + count + ' مسیر API).', 'ok');
+          })
+          .catch(function (error) { setStatus(error && error.message && error.name !== 'TypeError' ? error.message : networkMessage(error), 'error'); })
+          .finally(function () { setBusy(false); });
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (busy) return;
+        var target;
+        try { target = currentTarget(); }
+        catch (error) { setStatus(error.message || 'نشانی سایت معتبر نیست.', 'error'); return; }
+        var accessKey = String(keyInput.value || '').trim();
+        if (!accessKey) { setStatus('کلید دسترسی را وارد کنید.', 'error'); keyInput.focus(); return; }
+
+        var info = platformInfo();
+        var deviceName = String(deviceInput.value || '').trim();
+        if (!deviceName) deviceName = info.platform + ' — دستگاه من';
+        setBusy(true);
+        setStatus('در حال اعتبارسنجی کلید دسترسی…', 'info');
+
+        requestJson(target.rest + 'handshake', {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            access_key: accessKey,
+            device_name: deviceName,
+            platform: info.platform,
+            os_version: info.os_version,
+            app_version: '1.0.0'
+          })
+        }, 15000).then(function (result) {
+          var envelope = result.payload || {};
+          var data = envelope && envelope.data && typeof envelope.data === 'object' ? envelope.data : envelope;
+          if (!result.response.ok || !data || !data.token) {
+            throw new Error(serverMessage(result, 'اتصال انجام نشد. کلید دسترسی یا تنظیمات سایت را بررسی کنید.'));
+          }
+
+          try {
+            var oldApi = localStorage.getItem('wsm_api') || '';
+            var oldTarget = null;
+            try { if (oldApi) oldTarget = normalizeSite(oldApi); } catch (error) {}
+            if (oldTarget && isPackagedApp() && oldTarget.site === location.origin) {
+              oldApi = '';
+              oldTarget = null;
+            }
+            var sameSite = oldTarget && oldTarget.rest.replace(/\/$/, '').toLowerCase() === target.rest.replace(/\/$/, '').toLowerCase();
+            if (oldApi && oldTarget && !sameSite && !window.confirm('نشانی فروشگاه با اتصال قبلی متفاوت است. فقط اگر عملیات آفلاین فروشگاه قبلی همگام شده‌اند ادامه دهید؛ صف یا دادهٔ آفلاین را به فروشگاه جدید منتقل نکنید. ادامه می‌دهید؟')) {
+              setStatus('اتصال لغو شد. ابتدا صف همگام‌سازی فروشگاه قبلی را بررسی کنید.', 'warn');
+              setBusy(false);
+              return null;
+            }
+
+            ['wsm_token', 'wsm_refresh', 'wsm_device_id', 'wsm_sign_key', 'wsm_role', 'wsm_pending_login', 'wsm_store', 'wsm_api']
+              .forEach(function (name) { localStorage.removeItem(name); });
+            Object.keys(localStorage).forEach(function (name) {
+              if (name.indexOf('wsm_cache:') === 0) localStorage.removeItem(name);
+            });
+
+            localStorage.setItem('wsm_api', target.rest);
+            localStorage.setItem('wsm_store', data.store_name || '');
+            var loginRequired = data.login_required === true || String(data.device_id) === '0' || !data.signing_key;
+            if (loginRequired) {
+              localStorage.setItem('wsm_pending_login', '1');
+            } else {
+              localStorage.setItem('wsm_token', data.token);
+              if (data.refresh_token) localStorage.setItem('wsm_refresh', data.refresh_token);
+              if (data.device_id !== undefined && data.device_id !== null) localStorage.setItem('wsm_device_id', String(data.device_id));
+              localStorage.setItem('wsm_sign_key', data.signing_key);
+              if (data.role) localStorage.setItem('wsm_role', data.role);
+            }
+          } catch (error) {
+            throw new Error('اطلاعات اتصال در حافظهٔ برنامه ذخیره نشد. دسترسی ذخیره‌سازی WebView را بررسی و دوباره تلاش کنید.');
+          }
+
+          setStatus('اتصال به سایت موفق بود ✅\nاکنون صفحهٔ ورود کارمند باز می‌شود…', 'ok');
+          window.setTimeout(function () {
+            var destination = window.top !== window ? './index.html?desktop=1' : './desktop.html';
+            location.replace(destination);
+          }, 350);
+          return true;
+        }).catch(function (error) {
+          setStatus(error && error.name !== 'TypeError' && error.message ? error.message : networkMessage(error), 'error');
+        }).finally(function () {
+          if (busy) setBusy(false);
+        });
+      });
+
+      toggleKeyButton.addEventListener('click', function () {
+        var reveal = keyInput.type === 'password';
+        keyInput.type = reveal ? 'text' : 'password';
+        toggleKeyButton.textContent = reveal ? 'پنهان' : 'نمایش';
+        toggleKeyButton.setAttribute('aria-pressed', String(reveal));
+        keyInput.focus();
+      });
+
+      siteInput.addEventListener('input', function () { lastSite = null; });
+      try {
+        var storedApi = localStorage.getItem('wsm_api') || '';
+        siteInput.value = apiUrlToSite(storedApi);
+      } catch (error) {}
+
+      try {
+        if ('serviceWorker' in navigator && location.protocol !== 'tauri:' && location.protocol !== 'file:') {
+          navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).catch(function () {});
+        }
+      } catch (error) {}
+    })();
+  </script>
+</body>
+</html>

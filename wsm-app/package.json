@@ -1,0 +1,12 @@
+{
+  "name": "wp-store-manager-wsm-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Vite production build for the WP Store Manager desktop app shell",
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "wp-store-manager-desktop",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Windows desktop wrapper for the existing WP Store Manager app",
+  "scripts": {
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0",
+    "@tauri-apps/plugin-http": "^2.0.0",
+    "@tauri-apps/plugin-sql": "^2.0.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}

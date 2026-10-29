@@ -1,0 +1,578 @@
+/* مدیر فروشگاه — استایل پنل wp-admin (RTL) */
+.wsm-admin-wrapper.wsm-wrap{ font-family: Vazirmatn, Tahoma, system-ui, sans-serif; }
+.wsm-admin-wrapper.wsm-wrap .wsm-title{ font-size: 22px; margin: 12px 0 8px; }
+.wsm-admin-wrapper .wsm-tabs{ display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 18px; }
+.wsm-admin-wrapper .wsm-tabs a{ text-decoration: none; padding: 6px 12px; border-radius: 999px; background: #f0f0f1; color: #1d2327; border: 1px solid #dcdcde; font-size: 13px; }
+.wsm-admin-wrapper .wsm-tabs a:hover{ background: #e5f5f3; border-color: #0d9488; color: #0f766e; }
+.wsm-admin-wrapper .wsm-cards{ display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.wsm-admin-wrapper .wsm-card{ background: #fff; border: 1px solid #dcdcde; border-top: 4px solid #0d9488; border-radius: 10px; padding: 14px 16px; }
+.wsm-admin-wrapper .wsm-card span{ display: block; color: #50575e; font-size: 13px; margin-bottom: 6px; }
+.wsm-admin-wrapper .wsm-card strong{ font-size: 26px; color: #1d2327; }
+.wsm-admin-wrapper .wsm-row{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 960px) { .wsm-admin-wrapper .wsm-row{ grid-template-columns: 1fr; } }
+.wsm-admin-wrapper .wsm-panel{ background: #fff; border: 1px solid #dcdcde; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+.wsm-admin-wrapper .wsm-panel h2{ margin-top: 0; font-size: 16px; }
+.wsm-admin-wrapper .wsm-badge{ display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; line-height: 1.8; }
+.wsm-admin-wrapper .wsm-badge-green{ background: #dcfce7; color: #166534; }
+.wsm-admin-wrapper .wsm-badge-red{ background: #fee2e2; color: #991b1b; }
+.wsm-admin-wrapper .wsm-badge-amber{ background: #fef3c7; color: #92400e; }
+.wsm-admin-wrapper .wsm-badge-grey{ background: #e5e7eb; color: #374151; }
+.wsm-admin-wrapper .wsm-keybox{ display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: #0f1930; color: #e9efff; border-radius: 10px; padding: 14px 16px; margin: 12px 0 18px; border: 2px solid #2dd4bf; }
+.wsm-admin-wrapper .wsm-keybox code{ font-size: 15px; direction: ltr; letter-spacing: .3px; word-break: break-all; transition: border-color .2s; }
+.wsm-admin-wrapper .wsm-filter{ display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+.wsm-admin-wrapper .wsm-actions .button{ margin-bottom: 4px; }
+.wsm-admin-wrapper.wsm-wrap table.widefat td, .wsm-admin-wrapper.wsm-wrap table.widefat th{ vertical-align: middle; }
+
+.wsm-admin-wrapper .wsm-permission-bulk{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0;padding:8px 10px;border:1px solid #c3c4c7;border-radius:6px;background:#f6f7f7}.wsm-admin-wrapper .wsm-permission-bulk label{display:inline-flex;align-items:center;gap:6px;margin:0;font-weight:600}.wsm-admin-wrapper .wsm-permission-bulk input{margin:0}.wsm-admin-wrapper .wsm-permission-bulk-status{color:#50575e;font-size:12px}
+
+/* Backup and restore controls, scoped exclusively to the Settings panel. */
+.wsm-admin-wrapper #wsm-backup-control [hidden]{ display: none !important; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-subpanel{ border-top: 1px solid #dcdcde; margin-top: 18px; padding-top: 14px; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-subpanel h3{ margin: 0 0 10px; font-size: 15px; }
+.wsm-admin-wrapper .wsm-backup-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px 18px; }
+.wsm-admin-wrapper .wsm-backup-field{ display: flex; flex-direction: column; gap: 5px; margin: 8px 0; }
+.wsm-admin-wrapper .wsm-backup-field > span{ font-weight: 600; }
+.wsm-admin-wrapper .wsm-backup-field input[type="text"], .wsm-admin-wrapper .wsm-backup-field input[type="email"], .wsm-admin-wrapper .wsm-backup-field input[type="number"], .wsm-admin-wrapper .wsm-backup-field select{ max-width: 100%; }
+.wsm-admin-wrapper .wsm-backup-field.wsm-backup-check{ flex-direction: row; align-items: center; gap: 8px; }
+.wsm-admin-wrapper .wsm-backup-check input{ margin: 0; }
+.wsm-admin-wrapper .wsm-backup-create-selection{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:12px 0}
+.wsm-admin-wrapper .wsm-backup-selection-column{min-width:0;padding:10px;border:1px solid #c3c4c7;border-radius:7px;background:#f6f7f7}
+.wsm-admin-wrapper .wsm-backup-selection-column h4{margin:0 0 8px}
+.wsm-admin-wrapper .wsm-backup-selection-actions{grid-column:1/-1}
+.wsm-admin-wrapper .wsm-backup-create-choice{display:flex;align-items:flex-start;gap:8px;margin:5px 0;padding:7px 9px;border:1px solid #dcdcde;border-radius:5px;background:#fff;overflow-wrap:anywhere}
+.wsm-admin-wrapper .wsm-backup-create-choice input{flex:0 0 auto;margin:3px 0 0}
+.wsm-admin-wrapper .wsm-backup-create-choice span{min-width:0}
+.wsm-admin-wrapper .wsm-backup-old-warning{border-inline-start:4px solid #d63638!important;background:#fcf0f1!important;color:#8a2424!important;padding:8px 12px!important;font-weight:600}
+.wsm-admin-wrapper .wsm-backup-version-confirm{border-color:#d63638;background:#fcf0f1}
+.wsm-admin-wrapper .wsm-backup-delete-warning{border-inline-start:4px solid #b32d2e!important;background:#fcf0f1!important;color:#762326!important;padding:8px 12px!important}
+.wsm-admin-wrapper .wsm-backup-delete-warning .wsm-backup-confirm{border-color:#d63638;background:#fff1f1;color:#762326;font-weight:600}
+.wsm-admin-wrapper .wsm-backup-file-preview{max-height:420px;overflow:auto;padding:8px 10px;border:1px solid #dcdcde;border-radius:6px;background:#fff}
+.wsm-admin-wrapper .wsm-backup-file-preview code{overflow-wrap:anywhere}
+.wsm-admin-wrapper .wsm-backup-status{ display: inline-block; margin: 6px 4px; }
+.wsm-admin-wrapper .wsm-backup-status.is-error{ color: #b32d2e; font-weight: 600; }
+.wsm-admin-wrapper .wsm-backup-status.is-success{ color: #137333; font-weight: 600; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-progress{ display: inline-block; width: 180px; max-width: 45vw; height: 8px; margin: 0 8px; overflow: hidden; vertical-align: middle; border-radius: 99px; background: #dcdcde; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-progress-bar{ display: block; width: 36%; height: 100%; border-radius: inherit; background: #2271b1; animation: wsm-backup-indeterminate 1.25s ease-in-out infinite; }
+@keyframes wsm-backup-indeterminate { from { transform: translateX(-125%); } to { transform: translateX(290%); } }
+@media (prefers-reduced-motion: reduce) { .wsm-admin-wrapper .wsm-backup-panel .wsm-backup-progress-bar{ width: 100%; background: repeating-linear-gradient(135deg, #2271b1 0 8px, #8ab5d8 8px 16px); opacity: .75; animation: none; } }.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-table-wrap{ max-width: 100%; overflow-x: auto; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-table-wrap table{ min-width: 760px; }
+.wsm-admin-wrapper .wsm-restore-choice{ display: flex; align-items: flex-start; gap: 8px; margin: 5px 0; padding: 7px 10px; border: 1px solid #dcdcde; border-radius: 6px; background: #fff; }
+.wsm-admin-wrapper .wsm-restore-choice input{ flex: 0 0 auto; margin-top: 3px; }
+.wsm-admin-wrapper .wsm-restore-choice span{ overflow-wrap: anywhere; }
+.wsm-admin-wrapper .wsm-restore-stats{ display: grid; grid-template-columns: repeat(auto-fit, minmax(115px, 1fr)); gap: 8px; margin: 12px 0; }
+.wsm-admin-wrapper .wsm-restore-stat{ display: flex; flex-direction: column; gap: 3px; border: 1px solid #dcdcde; border-radius: 7px; padding: 8px 10px; background: #f6f7f7; }
+.wsm-admin-wrapper .wsm-restore-stat span{ color: #50575e; font-size: 12px; }
+.wsm-admin-wrapper .wsm-restore-stat strong{ font-size: 18px; }
+.wsm-admin-wrapper .wsm-restore-detail{ border-right: 3px solid #dcdcde; padding-right: 9px; overflow-wrap: anywhere; }
+.wsm-admin-wrapper .wsm-backup-panel #wsm-restore-metadata{ overflow-wrap: anywhere; }
+.wsm-admin-wrapper .wsm-backup-confirm{ display: block; margin: 10px 0; padding: 8px 10px; border: 1px solid #b7c9c7; border-radius: 6px; background: #f0fdfa; }
+.wsm-admin-wrapper .wsm-backup-confirm input{ margin-left: 6px; }
+
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-history-filters{ display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px; margin: 10px 0 14px; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-history-filters label{ display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-history-filters select{ min-width: 150px; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-delete-form{ display: inline; margin-inline-start: 4px; }
+.wsm-admin-wrapper .wsm-backup-panel .wsm-backup-delete-form .button{ vertical-align: middle; }
+
+/* Keep all WSM admin content inside WordPress's existing content column. */
+.wsm-admin-wrapper.wsm-wrap{
+    /* Preserve WordPress core page geometry; only prevent child overflow. */
+    box-sizing: border-box;
+    min-width: 0;
+}
+.wsm-admin-wrapper .wsm-admin-content{
+    position: static;
+    float: none;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper .wsm-admin-content > *, .wsm-admin-wrapper .wsm-admin-content .wsm-panel, .wsm-admin-wrapper .wsm-admin-content .wsm-grid, .wsm-admin-wrapper .wsm-admin-content .wsm-row, .wsm-admin-wrapper .wsm-admin-content .wsm-cards, .wsm-admin-wrapper .wsm-admin-content .wsm-tabs, .wsm-admin-wrapper .wsm-admin-content .wsm-permission-tree, .wsm-admin-wrapper .wsm-admin-content .wsm-backup-table-wrap{
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.wsm-admin-wrapper .wsm-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px 16px;
+    align-items: start;
+}
+.wsm-admin-wrapper .wsm-grid-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wsm-admin-wrapper .wsm-grid-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.wsm-admin-wrapper .wsm-grid > *{
+    min-width: 0;
+    max-width: 100%;
+}
+@media screen and (max-width: 960px) {
+    .wsm-admin-wrapper .wsm-grid-3{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .wsm-admin-wrapper .wsm-admin-content{
+        width: 100%;
+    }
+    .wsm-admin-wrapper .wsm-admin-content .wsm-grid-2, .wsm-admin-wrapper .wsm-admin-content .wsm-grid-3{
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Employee page: contained RTL layout, predictable form fields, visible permissions and a scroll-safe table. */
+.wsm-admin-wrapper.wsm-wrap.wsm-employees-page{
+    /* Let WordPress core own the page geometry and admin-sidebar offset. */
+    min-width: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+}
+.wsm-admin-wrapper.wsm-employees-page > .wsm-admin-content{
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-panel, .wsm-admin-wrapper.wsm-employees-page .wsm-employee-form, .wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap{
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-help{
+    margin: 8px 0 16px;
+    line-height: 1.8;
+}
+
+
+
+
+
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form > h3{
+    margin: 20px 0 10px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permissions{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 10px 0 18px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-group{
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-group > summary{
+    padding: 11px 14px;
+    cursor: pointer;
+    background: #f6f7f7;
+    line-height: 1.7;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-group[open] > summary{
+    border-bottom: 1px solid #dcdcde;
+    border-radius: 6px 6px 0 0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 16px;
+    align-items: start;
+    padding: 12px 14px !important;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-item{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    padding: 4px 0;
+    line-height: 1.65;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-item input[type="checkbox"]{
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin: 3px 0 0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-item span{
+    display: block;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-item code{
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-panel{
+    min-width: 0;
+    max-width: 100%;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap{
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap > table.widefat{
+    width: 100%;
+    min-width: 1180px;
+    margin: 0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap table{
+    direction: rtl;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap th, .wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap td{
+    text-align: right;
+    vertical-align: middle;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap thead th{
+    white-space: nowrap;
+}
+
+.wsm-admin-wrapper.wsm-employees-page [hidden]{
+    display:none !important;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-heading{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px 0 10px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-heading h3{
+    margin:0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-permission-selected-count{
+    display:inline-block;
+    margin-inline-start:5px;
+    color:#646970;
+    font-size:12px;
+    font-weight:400;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-global-actions,
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-group-actions,
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-actions{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:7px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-toolbar{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:7px 12px;
+    margin:10px 0 12px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-toolbar label{
+    font-weight:600;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-toolbar input{
+    width:300px;
+    max-width:100%;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-empty{
+    margin:8px 0;
+    padding:10px 12px;
+    border:1px solid #dcdcde;
+    border-radius:6px;
+    color:#646970;
+    background:#f6f7f7;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-group-actions{
+    padding:10px 14px 0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-toolbar{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    margin:10px 0 14px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-actions select{
+    min-width:220px;
+    max-width:100%;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-search input{
+    width:300px;
+    max-width:100%;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-status{
+    flex:1 1 100%;
+    min-height:18px;
+    margin:0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-status.is-success{color:#137333;font-weight:600}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-status.is-warning{color:#996800;font-weight:600}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-bulk-status.is-error{color:#b32d2e;font-weight:600}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap th.check-column{
+    width:36px;
+    padding:8px 10px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap input.wsm-employee-select-all,
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-table-wrap input.wsm-employee-row-select{
+    margin:0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-no-results td,
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-empty-row td{
+    padding:18px;
+    color:#646970;
+    text-align:center;
+}
+
+@media screen and (max-width: 782px) {
+    .wsm-admin-wrapper.wsm-employees-page .wsm-employee-permission-grid{
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Devices page: restore core sidebar geometry, align sections, and contain wide tables. */
+.wsm-admin-wrapper.wsm-wrap.wsm-devices-page{
+    min-width: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-tabs{
+    float: none;
+    clear: both;
+    max-width: 100%;
+    margin: 8px 0 12px;
+    line-height: 2;
+    overflow-wrap: anywhere;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-tabs li{
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
+    vertical-align: middle;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-search{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    min-width: 0;
+    margin: 10px 0 16px;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-search input[type="search"]{
+    flex: 1 1 260px;
+    width: 100%;
+    max-width: 420px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid{
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin: 18px 0;
+    align-items: stretch;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid > .wsm-panel{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid .wsm-panel form > p{
+    margin: 0 0 12px;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid .wsm-panel form p label{
+    display: block;
+    max-width: 100%;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid .wsm-panel input.regular-text, .wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid .wsm-panel select{
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-unblock-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-ip-input{
+    flex: 1 1 220px;
+    width: 100%;
+    max-width: 420px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-panel{
+    max-width: 100%;
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap > table.widefat{
+    width: 100%;
+    margin: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wide > table.widefat{
+    min-width: 1320px;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-ip > table.widefat{
+    min-width: 960px;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-history > table.widefat{
+    min-width: 780px;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap th{
+    white-space: nowrap;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap th, .wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap td{
+    text-align: right;
+    vertical-align: middle;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-table-wrap td code{
+    overflow-wrap: anywhere;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-name-form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-name-form .regular-text{
+    flex: 1 1 130px;
+    width: 100%;
+    max-width: 220px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-details{
+    max-width: 100%;
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-details > summary{
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permissions{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-group{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 8px 0;
+    padding: 8px 10px 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-list{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 12px;
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-item{
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 0;
+    margin: 0;
+    padding: 3px 0;
+    line-height: 1.55;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-item input[type="checkbox"]{
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    margin: 3px 0 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-item span{
+    display: block;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+@media screen and (max-width: 782px) {
+    .wsm-admin-wrapper.wsm-devices-page .wsm-device-search input[type="search"]{
+        max-width: 100%;
+    }
+    .wsm-admin-wrapper.wsm-devices-page .wsm-device-permission-list{
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-add-form{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-setup-grid .wsm-panel .wsm-device-add-form > p{
+    min-width: 0;
+    margin: 0;
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-add-form > .button{
+    grid-column: 1 / -1;
+    justify-self: start;
+}
+@media screen and (max-width: 782px) {
+    .wsm-admin-wrapper.wsm-devices-page .wsm-device-add-form{
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* WordPress-native employee form table, scoped to this WSM admin page only. */
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table {
+    width: 100%;
+    margin: 0 0 18px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table th {
+    width: 190px;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table td {
+    min-width: 0;
+}
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table input.regular-text,
+.wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table select {
+    width: 100%;
+    max-width: 440px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 782px) {
+    .wsm-admin-wrapper.wsm-employees-page .wsm-employee-form-table th {
+        width: auto;
+    }
+}
+.wsm-admin-wrapper.wsm-devices-page .wsm-device-row-form {
+    display: inline-block;
+    margin: 0;
+}

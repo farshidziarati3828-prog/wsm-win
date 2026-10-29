@@ -1,0 +1,21 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Least-privilege permissions for the bundled WP Store Manager window.",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "https://rointansupplement.ir/wp-json/**"
+        }
+      ]
+    },
+    "sql:default",
+    "sql:allow-execute"
+  ]
+}

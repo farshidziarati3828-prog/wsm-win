@@ -1,0 +1,29 @@
+[package]
+name = "wsm-desktop"
+version = "1.0.0"
+description = "WP Store Manager desktop application"
+edition = "2021"
+rust-version = "1.90"
+build = "build.rs"
+
+[lib]
+name = "wsm_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "wsm-desktop"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2" }
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri = { version = "2" }
+tauri-plugin-http = "2"
+tauri-plugin-shell = "2.5"
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+
+[features]
+custom-protocol = ["tauri/custom-protocol"]

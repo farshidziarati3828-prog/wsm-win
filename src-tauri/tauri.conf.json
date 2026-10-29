@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "WP Store Manager Desktop",
+  "version": "1.0.0",
+  "identifier": "ir.rointansupplement.wpstoremanager.desktop",
+  "build": {
+    "beforeDevCommand": {
+      "script": "node scripts/build-frontend.mjs && node scripts/prepare-sidecar.mjs",
+      "wait": true
+    },
+    "beforeBuildCommand": "node scripts/build-frontend.mjs && node scripts/prepare-sidecar.mjs",
+    "frontendDist": "../wsm-app/dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "مدیر فروشگاه — نسخه دسکتاپ",
+        "width": 1440,
+        "height": 900,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "capabilities": [
+        "default"
+      ],
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:8765 https: http:; worker-src 'self' blob:; frame-src 'self' https://rointansupplement.ir; form-action 'self' https://rointansupplement.ir"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "externalBin": [
+      "binaries/wsm-local-bridge"
+    ],
+    "targets": [
+      "nsis",
+      "msi"
+    ],
+    "category": "Business",
+    "shortDescription": "مدیریت فروشگاه ووکامرس",
+    "publisher": "Rointan Supplement",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "bundleVCRuntime": true,
+      "minimumWebview2Version": "109.0.1518.78",
+      "webviewInstallMode": {
+        "type": "offlineInstaller",
+        "silent": true
+      },
+      "nsis": {
+        "installMode": "currentUser",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "startMenuFolder": "WP Store Manager",
+        "installerHooks": "./windows/hooks.nsh"
+      }
+    }
+  },
+  "plugins": {
+    "sql": {
+      "preload": [
+        "sqlite:wsm.db"
+      ]
+    }
+  }
+}

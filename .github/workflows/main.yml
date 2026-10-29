@@ -1,0 +1,58 @@
+name: Build Windows Installer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build Python Sidecar
+        run: |
+          cd bridge
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pyinstaller --onefile --name wsm-local-bridge wsm_local_bridge.py
+          
+      - name: Prepare Tauri Binaries
+        run: |
+          New-Item -ItemType Directory -Force -Path src-tauri/binaries
+          Copy-Item -Path bridge\dist\wsm-local-bridge.exe -Destination src-tauri\binaries\wsm-local-bridge-x86_64-pc-windows-msvc.exe
+
+      - name: Build Frontend
+        run: |
+          cd wsm-app
+          npm install
+          npm run build
+
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2.0.0"
+
+      - name: Build Tauri App
+        run: |
+          cd src-tauri
+          cargo tauri build --target x86_64-pc-windows-msvc
+
+      - name: Upload Windows Installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: WP-Store-Manager-Installer
+          path: |
+            src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe
+            src-tauri/target/x86_64-pc-windows-msvc/release/bundle/msi/*.msi
